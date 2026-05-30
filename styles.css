@@ -1,0 +1,256 @@
+:root {
+  --red: #c63c3c;
+  --black: #111;
+  --muted: #6f6661;
+  --paper: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f5f1ee;
+  color: var(--black);
+  font-family: "Libre Baskerville", Georgia, serif;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.invitation-page {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  background: var(--paper);
+  min-height: 100vh;
+}
+
+.design-top {
+  height: 980px;
+  overflow: hidden;
+  background: white;
+}
+
+.design-top img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(-8px);
+}
+
+.rsvp-box {
+  width: 80.55%;
+  margin: 17px auto 0;
+  min-height: 1041px;
+  border: 3px solid var(--black);
+  border-radius: 38px;
+  padding: 64px clamp(28px, 7vw, 92px) 58px;
+}
+
+.small-title {
+  margin: 0 0 20px;
+  color: var(--red);
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+h1 {
+  margin: 0 0 54px;
+  color: var(--red);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(4.5rem, 12vw, 9.5rem);
+  font-weight: 600;
+  line-height: 0.78;
+  text-align: center;
+}
+
+.rsvp-form {
+  display: grid;
+  gap: 30px;
+}
+
+.rsvp-form label,
+fieldset {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rsvp-form label > span,
+legend {
+  color: var(--red);
+  font-size: clamp(1rem, 2.1vw, 1.4rem);
+  line-height: 1.4;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1.5px solid rgba(17, 17, 17, 0.48);
+  border-radius: 10px;
+  background: white;
+  color: var(--black);
+  outline: 0;
+}
+
+input,
+select {
+  height: 70px;
+  padding: 0 22px;
+}
+
+textarea {
+  min-height: 168px;
+  padding: 20px 22px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(198, 60, 60, 0.12);
+}
+
+.radio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.radio-grid label {
+  min-height: 70px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid rgba(17, 17, 17, 0.18);
+  border-radius: 10px;
+  background: #e9e4e1;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.radio-grid input {
+  position: absolute;
+  width: auto;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-grid span {
+  color: var(--muted);
+  transition: color 180ms ease;
+}
+
+.radio-grid label:has(input:checked) span {
+  color: #ffffff;
+}
+
+.radio-grid label:first-child:has(input:checked) {
+  background: var(--red);
+}
+
+.radio-grid label:last-child:has(input:checked) {
+  background: var(--black);
+}
+
+.radio-grid label:has(input:checked) {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+button {
+  min-height: 72px;
+  margin-top: 18px;
+  border: 1.5px solid var(--red);
+  border-radius: 10px;
+  background: var(--red);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-status {
+  min-height: 28px;
+  margin: 0;
+  color: var(--red);
+  text-align: center;
+}
+
+.closing-mark {
+  min-height: 294px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  color: var(--red);
+}
+
+.closing-mark span {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+.closing-mark strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3.8rem, 9vw, 7.4rem);
+  font-weight: 600;
+  line-height: 0.8;
+}
+
+@media (max-width: 700px) {
+  body {
+    background: white;
+  }
+
+  .design-top {
+    height: 94vw;
+  }
+
+  .rsvp-box {
+    width: calc(100% - 36px);
+    min-height: auto;
+    margin-top: 16px;
+    border-width: 2px;
+    border-radius: 24px;
+    padding: 38px 22px 34px;
+  }
+
+  h1 {
+    margin-bottom: 34px;
+  }
+
+  .rsvp-form {
+    gap: 22px;
+  }
+
+  .radio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  input,
+  select,
+  textarea,
+  .radio-grid label,
+  button {
+    min-height: 58px;
+  }
+}

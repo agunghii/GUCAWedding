@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GUCA RSVP</title>
+  <meta name="description" content="RSVP pernikahan GUCA dengan tampilan mengikuti desain undangan asli.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="invitation-page">
+    <section class="design-top" aria-label="Desain undangan asli">
+      <img src="assets/guca-rsvp.svg" alt="GUCA wedding invitation">
+    </section>
+
+    <section class="rsvp-box" aria-labelledby="rsvpTitle">
+      <p class="small-title">Konfirmasi kehadiran</p>
+      <h1 id="rsvpTitle">RSVP</h1>
+
+      <form id="rsvpForm" class="rsvp-form">
+        <label>
+          <span>Nama</span>
+          <input name="name" type="text" autocomplete="name" required>
+        </label>
+
+        <label>
+          <span>Nomor WhatsApp</span>
+          <input name="phone" type="tel" autocomplete="tel" required>
+        </label>
+
+        <fieldset>
+          <legend>Apakah Anda akan hadir?</legend>
+          <div class="radio-grid">
+            <label>
+              <input type="radio" name="attendance" value="Hadir" checked>
+              <span>Hadir</span>
+            </label>
+            <label>
+              <input type="radio" name="attendance" value="Tidak hadir">
+              <span>Tidak Hadir</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <label>
+          <span>Jumlah Tamu</span>
+          <select name="guests">
+            <option value="1">1 Orang</option>
+            <option value="2">2 Orang</option>
+            <option value="3">3 Orang</option>
+            <option value="4">4 Orang</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Ucapan</span>
+          <textarea name="message" rows="5"></textarea>
+        </label>
+
+        <button type="submit">Kirim Konfirmasi</button>
+        <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer class="closing-mark">
+      <span>Terima kasih</span>
+      <strong>GUCA</strong>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
