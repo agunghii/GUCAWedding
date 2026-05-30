@@ -1,22 +1,29 @@
 const form = document.querySelector("#rsvpForm");
 const statusText = document.querySelector("#formStatus");
 
-const whatsappNumber = "6285183004380";
+const googleForm = {
+  action: "https://docs.google.com/forms/d/e/1FAIpQLSeBFGCosLkPni0dWWT49wfkhvJbYE2Swl7v1XhUAKPzQ_4SJA/formResponse",
+  fields: {
+    name: "entry.1741456826",
+    phone: "entry.1814776853",
+    attendance: "entry.1887311059",
+    guests: "entry.2108928528",
+    message: "entry.1112009257",
+  },
+};
 
-const buildWhatsappMessage = (data) => {
-  return [
-    "Halo, saya ingin konfirmasi kehadiran untuk undangan GUCA.",
-    "",
-    `Nama: ${data.name || "-"}`,
-    `Nomor WhatsApp: ${data.phone || "-"}`,
-    `Kehadiran: ${data.attendance || "-"}`,
-    `Jumlah Tamu: ${data.guests || "-"}`,
-    `Ucapan: ${data.message || "-"}`,
-  ].join("\n");
+const buildGooglePayload = (data) => {
+  const payload = new FormData();
+
+  Object.entries(googleForm.fields).forEach(([key, entryId]) => {
+    payload.append(entryId, data[key] || "");
+  });
+
+  return payload;
 };
 
 if (form) {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const data = Object.fromEntries(new FormData(form).entries());
@@ -25,11 +32,20 @@ if (form) {
       submittedAt: new Date().toISOString(),
     }));
 
-    const message = encodeURIComponent(buildWhatsappMessage(data));
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+    statusText.textContent = "Mengirim konfirmasi...";
 
-    statusText.textContent = `Terima kasih, ${data.name}. WhatsApp akan terbuka untuk mengirim konfirmasi.`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    form.reset();
+    try {
+      await fetch(googleForm.action, {
+        method: "POST",
+        mode: "no-cors",
+        body: buildGooglePayload(data),
+      });
+
+      statusText.textContent = `Terima kasih, ${data.name}. Konfirmasi Anda telah terkirim.`;
+      form.reset();
+      form.querySelector('input[name="attendance"][value="Hadir"]').checked = true;
+    } catch (error) {
+      statusText.textContent = "Maaf, konfirmasi belum terkirim. Silakan coba lagi.";
+    }
   });
 }
